@@ -5,7 +5,7 @@ const btnBuyer = document.querySelector(".switch-buyer");
 const headerSection = document.querySelector(".header");
 const inputSearch = document.querySelector(".input-search");
 const btnAdd = document.querySelector(".btn-add-product");
-
+const catagoriesFiltter = document.querySelector(".catagoriesFiltter");
 
 
 btnSeller.addEventListener("click", moveToSeller);
@@ -13,7 +13,7 @@ btnBuyer.addEventListener("click", moveToBuyer);
 
 
 // displays the filtered(searched) items and removes the non-searched ones
-const updateResult = () => {
+const updateResultName = () => {
     let result = SearchByName(inputSearch.value);
     buyer.innerHTML = '';
     if (result.length == 0) {
@@ -28,9 +28,22 @@ const updateResult = () => {
 
 }
 
+// search by category 
+const updateResultCategory = () => {
+    
+    if(catagoriesFiltter.value === 'all'){
+        let items = JSON.parse(localStorage.getItem('cards'));
+        buildBuyer(items);
+    }else{
+        let result = FilterByCategory(catagoriesFiltter.value);
+        buyer.innerHTML = '';
+        buildBuyer(result);       
+    }
+}
 
+catagoriesFiltter.addEventListener('change', updateResultCategory);
 
-inputSearch.addEventListener('input', updateResult);
+inputSearch.addEventListener('input', updateResultName);
 
 function moveToBuyer() {
     seller.style.display = "none";
@@ -49,25 +62,33 @@ const arr = [{
         name: 'book7',
         imgSrc: "https://via.placeholder.com/150",
         price: "25$",
+        category:'vegetables'
     },
     {
         name: 'book1',
         imgSrc: "https://via.placeholder.com/150",
-        price: "40$"
+        price: "40$",
+        category:'vegetables'
+
     }, {
         name: 'book2',
         imgSrc: "https://via.placeholder.com/150",
-        price: "40$"
+        price: "40$",
+        category:'vegetables'
+
     },
     {
         name: 'book3',
         imgSrc: "https://via.placeholder.com/150",
-        price: "40$"
+        price: "40$",
+        category:'vegetables'
+
     },
     {
         name: 'book4',
         imgSrc: "https://via.placeholder.com/150",
-        price: "40$"
+        price: "40$",
+        category:'fruits'
     }
 ];
 
@@ -131,7 +152,7 @@ function buildSeller() {
     }
 
 }
-buildSeller();
+
 
 function switchBtnAddProduct() {
 
@@ -144,3 +165,4 @@ function displayForm() {
     const productForm = document.getElementById("product-form");
     productForm.classList.remove("hide");
 }
+buildSeller();
