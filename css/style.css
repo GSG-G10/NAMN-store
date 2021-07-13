@@ -10,13 +10,13 @@ body {
     flex-wrap: wrap;
 }
 
-.blue {
+.header {
     height: 150px;
     width: 100%;
     background-color: blue;
 }
 
-.flex {
+.buyer {
     display: flex;
     background-color: rgb(255, 115, 115);
     width: 80%;
@@ -28,7 +28,7 @@ body {
 .item {
     width: 30%;
     height: 300px;
-    background-color: rgb(219, 255, 205);
+    background-color: rgb(112, 255, 56);
     display: flex;
     justify-content: space-around;
     align-items: center;
