@@ -13,14 +13,17 @@ btnBuyer.addEventListener("click", moveToBuyer);
 // displays the filtered(searched) items and removes the non-searched ones
 const updateResult = () => {
     let result = SearchByName(inputSearch.value);
+    buyer.innerHTML = '';
     if (result.length == 0) {
-        // window.alert("Item does not found!");
+        buildBuyer(result);
         let error = document.createElement("h2");
-        error.classList.add("Item does not found!");
+        error.classList.add("error-message");
         buyer.appendChild(error);
-
+        error.textContent = "Item does not found";
+    } else {
+        buildBuyer(result);
     }
-    buildBuyer(result);
+
 }
 
 
