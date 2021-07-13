@@ -40,6 +40,7 @@ function moveToSeller() {
     seller.style.display = "flex";
 }
 
+
 const arr = [{
     name: 'book7',
     imgSrc: "https://via.placeholder.com/150",
@@ -100,3 +101,33 @@ function buildBuyer(arr) {
 buildBuyer(arr);
 
 
+function buildSeller() {
+
+    for (let i = 0; i < arr.length; i++) {
+        let ele = document.createElement("div")
+        ele.classList.add("item");
+        seller.appendChild(ele);
+
+        let img = document.createElement("img");
+        let pricePara = document.createElement("p");
+
+        img.classList.add("img-product");
+        pricePara.classList.add("cost");
+
+        ele.appendChild(img);
+        ele.appendChild(pricePara);
+
+        img.src = arr[i].imgSrc;
+        pricePara.textContent = arr[i].price;
+
+        let btnRemoveItem = document.createElement("button");
+        btnRemoveItem.classList.add("btn-to-removeItem");
+        btnRemoveItem.textContent = "Remove the Product";
+        ele.appendChild(btnRemoveItem);
+    }
+
+}
+
+
+
+buildSeller();
