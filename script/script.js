@@ -18,9 +18,8 @@ function moveToBuyer() {
 function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
-
-
 }
+
 
 const arr = [{
         imgSrc: "./7188506-1536497674.jpg",
@@ -85,4 +84,33 @@ function buildBuyer() {
 
 }
 
+function buildSeller() {
+
+    for (let i = 0; i < arr.length; i++) {
+        let ele = document.createElement("div")
+        ele.classList.add("item");
+        seller.appendChild(ele);
+
+        let img = document.createElement("img");
+        let pricePara = document.createElement("p");
+
+        img.classList.add("img-product");
+        pricePara.classList.add("cost");
+
+        ele.appendChild(img);
+        ele.appendChild(pricePara);
+
+        img.src = arr[i].imgSrc;
+        pricePara.textContent = arr[i].price;
+
+        let btnRemoveItem = document.createElement("button");
+        btnRemoveItem.classList.add("btn-to-removeItem");
+        btnRemoveItem.textContent = "Remove the Product";
+        ele.appendChild(btnRemoveItem);
+    }
+
+}
+
+
 buildBuyer();
+buildSeller();
