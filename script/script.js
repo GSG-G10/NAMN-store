@@ -7,10 +7,8 @@ const inputSearch = document.querySelector(".input-search");
 const btnAdd = document.querySelector(".btn-add-product");
 
 
-
 btnSeller.addEventListener("click", moveToSeller);
 btnBuyer.addEventListener("click", moveToBuyer);
-
 
 // displays the filtered(searched) items and removes the non-searched ones
 const updateResult = () => {
@@ -28,20 +26,19 @@ const updateResult = () => {
 
 }
 
-
-
 inputSearch.addEventListener('input', updateResult);
 
 function moveToBuyer() {
     seller.style.display = "none";
     buyer.style.display = "flex";
-    switchBtnAddProduct();
+    hideBtnAddProduct();
+
 }
 
 function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
-    switchBtnAddProduct();
+    showBtnAddProduct();
 }
 
 
@@ -133,9 +130,12 @@ function buildSeller() {
 }
 buildSeller();
 
-function switchBtnAddProduct() {
+function showBtnAddProduct() {
+    btnAdd.classList.remove("hide");
+}
 
-    btnAdd.classList.toggle("hide");
+function hideBtnAddProduct() {
+    btnAdd.classList.add("hide");
 }
 
 btnAdd.addEventListener("click", displayForm);
@@ -144,3 +144,7 @@ function displayForm() {
     const productForm = document.getElementById("product-form");
     productForm.classList.remove("hide");
 }
+
+// function for submit button
+const submitBtn = document.querySelector(".btn-add");
+const arrOfInputs = document.querySelectorAll("input");
