@@ -4,6 +4,8 @@ const btnSeller = document.querySelector(".switch-seller");
 const btnBuyer = document.querySelector(".switch-buyer");
 const headerSection = document.querySelector(".header");
 const inputSearch = document.querySelector(".input-search");
+const btnAdd = document.querySelector(".btn-add-product");
+
 
 
 btnSeller.addEventListener("click", moveToSeller);
@@ -33,11 +35,13 @@ inputSearch.addEventListener('input', updateResult);
 function moveToBuyer() {
     seller.style.display = "none";
     buyer.style.display = "flex";
+    switchBtnAddProduct();
 }
 
 function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
+    switchBtnAddProduct();
 }
 
 
@@ -126,6 +130,11 @@ function buildSeller() {
         ele.appendChild(btnRemoveItem);
     }
 
+}
+
+function switchBtnAddProduct() {
+
+    btnAdd.classList.toggle("hide");
 }
 
 

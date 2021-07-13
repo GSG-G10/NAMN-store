@@ -17,7 +17,7 @@
             <button class="switch-seller ">Seller</button>
             <button class="switch-buyer ">buyer</button>
             <div class="div-btn-add">
-                <button class="btn-add-product"> Add product</button>
+                <button class="btn-add-product hide"> Add product</button>
             </div>
         </nav>
 
@@ -35,13 +35,36 @@
     </section>
 
     <section class="seller">
+        <form id="product-form">
+            <div class="name-input">
+                <label for="name"> name  of product </label>
+                <input type="text" id="name">
+            </div>
+            <div class="image-input">
+                <label for="image"> link of product </label>
+                <input type="url" id="image">
+            </div>
+            <div class="price-input">
+                <label for="price"> price  of product $ </label>
+                <input type="number" id="price">
+            </div>
+            <div>
+                <label for="catagories">Choose a catagory:</label>
+                <select name="catagories" id="catagories" form="product-form">
+                    <option value="fruits">fruits</option>
+                    <option value="vegetables">vegetables‏</option>
+                    
+                </select>
+            </div>
+            <button type="button " class="btn-add ">add product</button>
+        </form>
     </section>
 
     <footer>
 
     </footer>
-    <script src="./script/script.js"></script>
-    <script src="./script/function.js"></script>
+    <script src="./script/script.js "></script>
+    <script src="./script/function.js "></script>
 
 </body>
 
