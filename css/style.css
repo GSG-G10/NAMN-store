@@ -27,7 +27,7 @@ body {
 
 .item {
     width: 30%;
-    height: 300px;
+    height: 50%;
     background-color: rgb(112, 255, 56);
     display: flex;
     justify-content: space-around;
