@@ -46,29 +46,29 @@ function moveToSeller() {
 
 
 const arr = [{
-    name: 'book7',
-    imgSrc: "https://via.placeholder.com/150",
-    price: "25$",
-},
-{
-    name: 'book1',
-    imgSrc: "https://via.placeholder.com/150",
-    price: "40$"
-}, {
-    name: 'book2',
-    imgSrc: "https://via.placeholder.com/150",
-    price: "40$"
-},
-{
-    name: 'book3',
-    imgSrc: "https://via.placeholder.com/150",
-    price: "40$"
-},
-{
-    name: 'book4',
-    imgSrc: "https://via.placeholder.com/150",
-    price: "40$"
-}
+        name: 'book7',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "25$",
+    },
+    {
+        name: 'book1',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$"
+    }, {
+        name: 'book2',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$"
+    },
+    {
+        name: 'book3',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$"
+    },
+    {
+        name: 'book4',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$"
+    }
 ];
 
 
@@ -131,12 +131,16 @@ function buildSeller() {
     }
 
 }
+buildSeller();
 
 function switchBtnAddProduct() {
 
     btnAdd.classList.toggle("hide");
 }
 
+btnAdd.addEventListener("click", displayForm);
 
-
-buildSeller();
+function displayForm() {
+    const productForm = document.getElementById("product-form");
+    productForm.classList.remove("hide");
+}
