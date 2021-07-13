@@ -44,7 +44,6 @@ function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
     showBtnAddProduct();
-    buildSeller();
     btnSeller.disabled = true;
     btnBuyer.disabled = false;
 
@@ -127,6 +126,7 @@ function buildSeller() {
     }
 
 }
+buildSeller();
 
 
 function showBtnAddProduct() {
@@ -177,3 +177,21 @@ function updateSections() {
     buildSeller();
     hideForm();
 }
+
+
+
+// function updateSections (current,next){
+//     if (next != current) {
+//         localStorage.setItem('cards', JSON.stringify(arr));
+//         let items = JSON.parse(localStorage.getItem('cards'));
+//         buildSeller(items);
+//         buildBuyer(items);
+//         hideForm();
+//     }
+// }
+
+
+
+// let current = arr.length
+// let next = arr.length
+// // updateSections(current,next);
