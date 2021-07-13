@@ -1,14 +1,31 @@
 const buyer = document.querySelector(".buyer");
 const seller = document.querySelector(".seller");
-const btnSeller = document.querySelector(".switch-seller")
-const btnBuyer = document.querySelector(".switch-buyer")
+const btnSeller = document.querySelector(".switch-seller");
+const btnBuyer = document.querySelector(".switch-buyer");
 const headerSection = document.querySelector(".header");
-
+const inputSearch = document.querySelector(".input-search");
 
 
 btnSeller.addEventListener("click", moveToSeller);
 btnBuyer.addEventListener("click", moveToBuyer);
 
+
+// displays the filtered(searched) items and removes the non-searched ones
+const updateResult = () => {
+    let result = SearchByName(inputSearch.value);
+    if (result.length == 0) {
+        // window.alert("Item does not found!");
+        let error = document.createElement("h2");
+        error.classList.add("Item does not found!");
+        buyer.appendChild(error);
+
+    }
+    buildBuyer(result);
+}
+
+
+
+inputSearch.addEventListener('input', updateResult);
 
 function moveToBuyer() {
     seller.style.display = "none";
@@ -18,71 +35,65 @@ function moveToBuyer() {
 function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
-
-
 }
 
 const arr = [{
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "25$",
-    },
-    {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    }, {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    },
-    {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    },
-    {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    },
-    {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    },
-    {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    }, {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    },
-    {
-        imgSrc: "./7188506-1536497674.jpg",
-        price: "40$"
-    },
+    name: 'book7',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "25$",
+},
+{
+    name: 'book1',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$"
+}, {
+    name: 'book2',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$"
+},
+{
+    name: 'book3',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$"
+},
+{
+    name: 'book4',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$"
+}
 ];
 
 
-function buildBuyer() {
+function buildBuyer(arr) {
+    let itemsInThePage = document.querySelectorAll(".item");
+    for (i of itemsInThePage) {
+        i.remove()
+    }
 
     for (let i = 0; i < arr.length; i++) {
         let ele = document.createElement("div")
         ele.classList.add("item");
         buyer.appendChild(ele);
-
         let img = document.createElement("img");
+        let name = document.createElement("h3");
         let pricePara = document.createElement("p");
-
         img.classList.add("img-product");
+        name.classList.add("name-product");
         pricePara.classList.add("cost")
-
         ele.appendChild(img);
+        ele.appendChild(name);
         ele.appendChild(pricePara);
 
         img.src = arr[i].imgSrc;
+        name.textContent = arr[i].name;
         pricePara.textContent = arr[i].price;
         let btnAddToCard = document.createElement("button");
         btnAddToCard.classList.add("btn-to-addCard");
         btnAddToCard.textContent = "add to card";
         ele.appendChild(btnAddToCard);
     }
-
 }
 
-buildBuyer();
+buildBuyer(arr);
+
+
