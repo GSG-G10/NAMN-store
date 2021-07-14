@@ -297,6 +297,7 @@ h1 {
     height: 300px;
     background-color: rgb(5, 88, 22);
     top: 150px;
+    box-shadow: 5px 5px 15px 5px #6d6767;
 }
 
 .seller .name-input {
