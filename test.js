@@ -1,13 +1,32 @@
-const {SearchByName} = require('./script/function')
+const {SearchByName,FilterByPrice,FilterByCategory} = require('./script/function')
 
-const item = [{name:'cc'},{name:'zz'}]
+const item = [{name:'cc',price:'15$',category:'fruits'},{name:'zz',price:'40$',category:'vegetables'}]
 
 describe('Testing SearchByName return array', () => {
 	test('Should return 1 when given 1', () => {
 		const actual = SearchByName('c',item)[0];
-		const expected = {name: 'cc'};
+		const expected = {name:'cc',price:'15$',category:'fruits'};
 		expect(actual).toEqual(expected);
 
+	});
+});
+
+
+
+describe('Testing SearchByPrice return array', () => {
+	test('Should return 1 when given 1', () => {
+		const actual = FilterByPrice(14,20,item)[0];
+		const expected = {name:'cc',price:'15$',category:'fruits'};
+		expect(actual).toEqual(expected);
+	});
+});
+
+
+describe('Testing FilterByCategory return array', () => {
+	test('Should return 1 when given 1', () => {
+		const actual = FilterByCategory('vegetables',item)[0];
+		const expected = {name:'zz',price:'40$',category:'vegetables'};
+		expect(actual).toEqual(expected);
 	});
 });
 
