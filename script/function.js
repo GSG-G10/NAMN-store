@@ -39,7 +39,7 @@ Number.prototype.between = function(a, b) {
 
 
 const FilterByPrice = (minPrice,maxPrice) => {
-  
+
   let resultSearch;
   let items = JSON.parse(localStorage.getItem("cards"));
   if (items === null) {
@@ -50,3 +50,5 @@ const FilterByPrice = (minPrice,maxPrice) => {
   }
   return resultSearch;
 };
+
+  

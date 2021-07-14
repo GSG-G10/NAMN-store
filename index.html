@@ -64,8 +64,8 @@
 
     <section class="grid-list">
         <div id="grid-list">
-            <button class="grid"><i class="fas fa-th"></i></button>
-            <button class="list"><i class="fas fa-list"></i></button>
+            <button><i class="fas fa-th"></i></button>
+            <button><i class="fas fa-list"></i></button>
         </div>
     </section>
 
@@ -74,28 +74,43 @@
 
     <section class="seller">
         <form id="product-form" class="hide">
-            <div class="name-input flex">
+            <div class="name-input">
                 <label for="name"> name of product </label>
                 <input class="input" type="text" id="name">
             </div>
-            <div class="image-input flex">
+            <div class="image-input">
                 <label for="image"> link of product </label>
                 <input class="input" type="url" id="image">
             </div>
-            <div class="price-input flex">
+            <div class="price-input">
                 <label for="price"> price of product $ </label>
                 <input class="input" type="number" id="price">
             </div>
-            <div class="flex">
-                <label for="catagories">Choose a catagory</label>
+            <div>
+                <label for="catagories">Choose a catagory:</label>
                 <select class="input" name="catagories" id="catagories" form="product-form">
                     <option value="fruits">fruits</option>
                     <option value="vegetables" selected>vegetables‏</option>
 
                 </select>
             </div>
-            <button type="button" class="btn-add flex">add product</button>
+            <button type="button" class="btn-add">add product</button>
         </form>
+    </section>
+
+    <section class="orders hide">
+
+        <table class="ord">
+            <tr class="tHeader">
+                <th>Name of product</th>
+                <th>Price</th>
+                <th>catagory</th>
+                <th>Unit.qunt</th>
+                <th>Total price</th>
+            </tr>    
+        </table>
+
+
     </section>
 
     <footer class="footer">
