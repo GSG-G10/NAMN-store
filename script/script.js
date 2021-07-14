@@ -63,11 +63,12 @@ const updateResultName = () => {
     }
 };
 const updateResultCategory = () => {
+    let items = JSON.parse(localStorage.getItem("cards"));
+
     if (catagoriesFiltter.value === "all") {
-        let items = JSON.parse(localStorage.getItem("cards"));
         buildBuyer(items);
     } else {
-        let result = FilterByCategory(catagoriesFiltter.value);
+        let result = FilterByCategory(catagoriesFiltter.value,items);
         buyer.textContent = "";
         buildSeller(result);
         buildBuyer(result);
@@ -78,9 +79,11 @@ const updateResultCategory = () => {
 
 inputSearch.addEventListener('input', updateResultName);
 const updateResultPrice = () => {
+    let items = JSON.parse(localStorage.getItem("cards"));
+
     let minPrice = document.querySelector(".minPrice").value;
     let maxPrice = document.querySelector(".maxPrice").value;
-    let result = FilterByPrice(minPrice, maxPrice);
+    let result = FilterByPrice(minPrice, maxPrice,items);
     buyer.textContent = "";
     buildSeller(result);
     buildBuyer(result);

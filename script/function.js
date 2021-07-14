@@ -18,9 +18,8 @@ const SearchByName = (input,items) => {
   return resultSearch;
 };
 
-const FilterByCategory = (input) => {
+const FilterByCategory = (input,items) => {
   let resultSearch;
-  let items = JSON.parse(localStorage.getItem("cards"));
   if (items === null) {
     window.alert("Item does not found");
   } else {
@@ -37,13 +36,11 @@ Number.prototype.between = function(a, b) {
 };
 
 
-const FilterByPrice = (minPrice,maxPrice) => {
+const FilterByPrice = (minPrice,maxPrice,items) => {
   let resultSearch;
-  let items = JSON.parse(localStorage.getItem("cards"));
   if (items === null) {
     window.alert("Item does not found");
   } else {
-
     resultSearch = items.filter((item) => parseFloat(item.price.replace('$','')).between(parseFloat(minPrice), parseFloat(maxPrice)) );
   }
   return resultSearch;
