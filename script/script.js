@@ -313,14 +313,6 @@ function showOrderSection () {
     let arrayOfOrders = JSON.parse(localStorage.getItem("orders"))
 
     for (i of arrayOfOrders){
-        let quant = arrayOfOrders.reduce ((acc, curr) => {
-            let quantit = curr.name;
-            if(arrayOfOrders.lastIndexOf(quantit)===arrayOfOrders.indexOf(quantit)){
-                return acc = acc+ curr;
-           }
-           return acc
-          
-        },0)
 
         createRow(i, quant);
         
