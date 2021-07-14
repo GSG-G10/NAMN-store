@@ -5,17 +5,22 @@ const btnBuyer = document.querySelector(".switch-buyer");
 const headerSection = document.querySelector(".header");
 const inputSearch = document.querySelector(".input-search");
 const btnAdd = document.querySelector(".btn-add-product");
+const productForm = document.getElementById("product-form");
+const arrOfInputs = document.querySelectorAll(".input");
 const catagoriesFiltter = document.querySelector(".catagoriesFiltter");
+const priceSearch = document.querySelector(".priceSearch");
 
+let id = 0;
 
 btnSeller.addEventListener("click", moveToSeller);
 btnBuyer.addEventListener("click", moveToBuyer);
 
 
+
 // displays the filtered(searched) items and removes the non-searched ones
 const updateResultName = () => {
     let result = SearchByName(inputSearch.value);
-    buyer.innerHTML = '';
+    buyer.textContent = "";
     if (result.length == 0) {
         buildBuyer(result);
         let error = document.createElement("h2");
@@ -23,38 +28,55 @@ const updateResultName = () => {
         buyer.appendChild(error);
         error.textContent = "Item does not found";
     } else {
+        buildSeller(result);
         buildBuyer(result);
     }
-
-}
-
-// search by category 
+};
 const updateResultCategory = () => {
-
-    if (catagoriesFiltter.value === 'all') {
-        let items = JSON.parse(localStorage.getItem('cards'));
+    if (catagoriesFiltter.value === "all") {
+        let items = JSON.parse(localStorage.getItem("cards"));
         buildBuyer(items);
     } else {
         let result = FilterByCategory(catagoriesFiltter.value);
-        buyer.innerHTML = '';
+        buyer.textContent = "";
+        buildSeller(result);
         buildBuyer(result);
     }
-}
+};
 
-catagoriesFiltter.addEventListener('change', updateResultCategory);
+const updateResultPrice = () => {
+    let minPrice = document.querySelector(".minPrice").value;
+    let maxPrice = document.querySelector(".maxPrice").value;
+    let result = FilterByPrice(minPrice, maxPrice);
+    buyer.textContent = "";
+    buildSeller(result);
+    buildBuyer(result);
+};
 
+catagoriesFiltter.addEventListener("change", updateResultCategory);
+priceSearch.addEventListener("click", updateResultPrice);
 inputSearch.addEventListener('input', updateResultName);
 
 function moveToBuyer() {
     seller.style.display = "none";
     buyer.style.display = "flex";
-    switchBtnAddProduct();
+    hideBtnAddProduct();
+    btnSeller.disabled = false;
+    btnBuyer.disabled = true;
+    let items = JSON.parse(localStorage.getItem("cards"));
+    buildBuyer(items);
+
+
 }
 
 function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
-    switchBtnAddProduct();
+    showBtnAddProduct();
+    btnSeller.disabled = true;
+    btnBuyer.disabled = false;
+    let items = JSON.parse(localStorage.getItem("cards"));
+    buildSeller(items);
 }
 
 
@@ -79,9 +101,8 @@ const arr = [{
 }
 ];
 
-
 function buildBuyer(arr) {
-    let itemsInThePage = document.querySelectorAll(".item");
+    let itemsInThePage = document.querySelectorAll(".buyer .item");
     for (i of itemsInThePage) {
         i.remove()
     }
@@ -100,9 +121,10 @@ function buildBuyer(arr) {
         ele.appendChild(name);
         ele.appendChild(pricePara);
 
-        img.src = arr[i].imgSrc;
+        img.src = arr[i].src;
         name.textContent = arr[i].name;
         pricePara.textContent = arr[i].price;
+
         let btnAddToCard = document.createElement("button");
         btnAddToCard.classList.add("btn-to-addCard");
         btnAddToCard.textContent = "Add to card";
@@ -110,10 +132,14 @@ function buildBuyer(arr) {
     }
 }
 
-buildBuyer(arr);
+function buildSeller(arr) {
 
+    let itemsInThePage = document.querySelectorAll(".seller .item");
+    for (i of itemsInThePage) {
+        i.remove()
+    }
+    itemsInThePage = document.querySelectorAll(".item");
 
-function buildSeller() {
 
     for (let i = 0; i < arr.length; i++) {
         let ele = document.createElement("div")
@@ -121,15 +147,19 @@ function buildSeller() {
         seller.appendChild(ele);
 
         let img = document.createElement("img");
+        let name = document.createElement("h3");
         let pricePara = document.createElement("p");
 
         img.classList.add("img-product");
+        name.classList.add("name-product");
         pricePara.classList.add("cost");
 
         ele.appendChild(img);
+        ele.appendChild(name);
         ele.appendChild(pricePara);
 
-        img.src = arr[i].imgSrc;
+        img.src = arr[i].url;
+        name.textContent = arr[i].name;
         pricePara.textContent = arr[i].price;
 
         let btnRemoveItem = document.createElement("button");
@@ -141,15 +171,70 @@ function buildSeller() {
 }
 
 
-function switchBtnAddProduct() {
+function showBtnAddProduct() {
+    btnAdd.classList.remove("hide");
+}
 
-    btnAdd.classList.toggle("hide");
+function hideBtnAddProduct() {
+    btnAdd.classList.add("hide");
 }
 
 btnAdd.addEventListener("click", displayForm);
 
 function displayForm() {
-    const productForm = document.getElementById("product-form");
+    for (let i = 0; i < arrOfInputs.length; i++) {
+        arrOfInputs[i].value = ""
+    }
+
     productForm.classList.remove("hide");
+
 }
-buildSeller();
+
+function hideForm() {
+    productForm.classList.add("hide");
+}
+
+// function for submit button
+
+const submitBtn = document.querySelector(".btn-add");
+submitBtn.addEventListener("click", saveInputValue)
+
+function saveInputValue() {
+
+    let objectOfNewProduct = {}
+
+    objectOfNewProduct["name"] = arrOfInputs[0].value
+    objectOfNewProduct["url"] = arrOfInputs[1].value;
+    objectOfNewProduct["price"] = arrOfInputs[2].value;
+    objectOfNewProduct["category"] = arrOfInputs[3].value;
+    objectOfNewProduct["id"] = arr.length + 1;
+
+    let oldItems = JSON.parse(localStorage.getItem("cards"));
+    if (oldItems == null || oldItems == 'null') {
+        let new_arr = []
+        new_arr.push(objectOfNewProduct)
+
+        localStorage.setItem("cards", JSON.stringify(new_arr));
+
+    } else {
+        oldItems.push(objectOfNewProduct)
+        localStorage.clear()
+        localStorage.setItem("cards", JSON.stringify(oldItems));
+
+    }
+
+    let items = JSON.parse(localStorage.getItem("cards"));
+    updateSections(items);
+
+}
+
+function updateSections(items) {
+    buildBuyer(items);
+    buildSeller(items);
+    hideForm();
+}
+
+function Updateonload() {
+    moveToBuyer()
+}
+window.onload = Updateonload();
