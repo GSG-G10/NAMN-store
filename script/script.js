@@ -22,32 +22,32 @@ const updateResultName = () => {
     let result = SearchByName(inputSearch.value);
     buyer.textContent = "";
     if (result.length == 0) {
-      buildBuyer(result);
-      let error = document.createElement("h2");
-      error.classList.add("error-message");
-      buyer.appendChild(error);
-      error.textContent = "Item does not found";
+        buildBuyer(result);
+        let error = document.createElement("h2");
+        error.classList.add("error-message");
+        buyer.appendChild(error);
+        error.textContent = "Item does not found";
     } else {
         buildSeller(result);
         buildBuyer(result);
     }
-  };
+};
 const updateResultCategory = () => {
     if (catagoriesFiltter.value === "all") {
-      let items = JSON.parse(localStorage.getItem("cards"));
-      buildBuyer(items);
+        let items = JSON.parse(localStorage.getItem("cards"));
+        buildBuyer(items);
     } else {
-      let result = FilterByCategory(catagoriesFiltter.value);
-      buyer.textContent = "";
-      buildSeller(result);
-      buildBuyer(result);
+        let result = FilterByCategory(catagoriesFiltter.value);
+        buyer.textContent = "";
+        buildSeller(result);
+        buildBuyer(result);
     }
-  };
-  
+};
+
 const updateResultPrice = () => {
     let minPrice = document.querySelector(".minPrice").value;
     let maxPrice = document.querySelector(".maxPrice").value;
-    let result = FilterByPrice(minPrice,maxPrice);
+    let result = FilterByPrice(minPrice, maxPrice);
     buyer.textContent = "";
     buildSeller(result);
     buildBuyer(result);
@@ -80,7 +80,25 @@ function moveToSeller() {
 }
 
 
-const arr = [
+const arr = [{
+    name: 'Carrot',
+    imgSrc: "https://images.unsplash.com/photo-1601493700750-58796129ebb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80",
+    price: "25$",
+    category: 'vegetables'
+},
+{
+    name: 'book1',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$",
+    category: 'vegetables'
+
+}, {
+    name: 'book2',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$",
+    category: 'vegetables'
+
+}
 ];
 
 function buildBuyer(arr) {
@@ -109,13 +127,13 @@ function buildBuyer(arr) {
 
         let btnAddToCard = document.createElement("button");
         btnAddToCard.classList.add("btn-to-addCard");
-        btnAddToCard.textContent = "add to card";
+        btnAddToCard.textContent = "Add to card";
         ele.appendChild(btnAddToCard);
     }
 }
 
 function buildSeller(arr) {
-    
+
     let itemsInThePage = document.querySelectorAll(".seller .item");
     for (i of itemsInThePage) {
         i.remove()
@@ -189,22 +207,22 @@ function saveInputValue() {
     objectOfNewProduct["url"] = arrOfInputs[1].value;
     objectOfNewProduct["price"] = arrOfInputs[2].value;
     objectOfNewProduct["category"] = arrOfInputs[3].value;
-    objectOfNewProduct["id"] = arr.length +1 ;
-    
+    objectOfNewProduct["id"] = arr.length + 1;
+
     let oldItems = JSON.parse(localStorage.getItem("cards"));
-    if (oldItems == null || oldItems == 'null'){
+    if (oldItems == null || oldItems == 'null') {
         let new_arr = []
         new_arr.push(objectOfNewProduct)
-        
+
         localStorage.setItem("cards", JSON.stringify(new_arr));
-        
-    }else{
+
+    } else {
         oldItems.push(objectOfNewProduct)
         localStorage.clear()
         localStorage.setItem("cards", JSON.stringify(oldItems));
 
     }
-    
+
     let items = JSON.parse(localStorage.getItem("cards"));
     updateSections(items);
 
@@ -216,7 +234,7 @@ function updateSections(items) {
     hideForm();
 }
 
-function Updateonload(){
+function Updateonload() {
     moveToBuyer()
 }
 window.onload = Updateonload();
