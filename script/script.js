@@ -11,8 +11,9 @@ const catagoriesFiltter = document.querySelector(".catagoriesFiltter");
 const priceSearch = document.querySelector(".priceSearch");
 btnSeller.addEventListener("click", moveToSeller);
 btnBuyer.addEventListener("click", moveToBuyer);
-
-
+const ordersBtn = document.querySelector(".cart");
+const ordersSection = document.querySelector(".orders")
+const gridBar = document.querySelector(".grid-list")
 
 // displays the filtered(searched) items and removes the non-searched ones
 const updateResultName = () => {
@@ -60,6 +61,7 @@ inputSearch.addEventListener('input', updateResultName);
 function moveToBuyer() {
     seller.style.display = "none";
     buyer.style.display = "flex";
+    ordersSection.style.display="none"
     hideBtnAddProduct();
     btnSeller.disabled = false;
     btnBuyer.disabled = true;
@@ -72,6 +74,7 @@ function moveToBuyer() {
 function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
+    ordersSection.style.display="none"
     showBtnAddProduct();
     btnSeller.disabled = true;
     btnBuyer.disabled = false;
@@ -129,6 +132,8 @@ function buildBuyer(arr) {
 
         let btnAddToCard = document.createElement("button");
         btnAddToCard.classList.add("btn-to-addCard");
+        btnAddToCard.setAttribute("id", arr[i].name);
+        btnAddToCard.setAttribute("onclick", "add(event);");/*---*/
         btnAddToCard.textContent = "Add to card";
         ele.appendChild(btnAddToCard);
     }
@@ -230,7 +235,7 @@ function saveInputValue() {
 
     } else {
         oldItems.push(objectOfNewProduct)
-        localStorage.clear()
+        localStorage.removeItem("cards")
         localStorage.setItem("cards", JSON.stringify(oldItems));
 
     }
@@ -253,7 +258,6 @@ function saveInputValue() {
 function remove(event) {
     let s = event.target;
     let items = JSON.parse(localStorage.getItem("cards"));
-    console.log(s.id);
     for (let i = 0; i < items.length; i++) {
         if (s.id == items[i].name) {
             items.splice(i, 1);
@@ -261,8 +265,27 @@ function remove(event) {
     }
     let element = document.getElementById(s.id);
     element.parentNode.remove();
-    localStorage.clear()
+    localStorage.removeItem("cards")
     localStorage.setItem("cards", JSON.stringify(items));
+}
+
+
+function add(event) {
+    let s = event.target;
+    let items = JSON.parse(localStorage.getItem("cards"));
+    let ordersProduct = JSON.parse(localStorage.getItem("orders"));
+    console.log(ordersProduct)
+    
+    let resultSearch = items.filter((item) => item.name.includes(s.id));
+    if (ordersProduct == null) {
+        localStorage.setItem("orders", JSON.stringify(resultSearch))
+    } else {
+        ordersProduct.push(resultSearch[0])
+        localStorage.removeItem("orders")
+        localStorage.setItem("orders", JSON.stringify(ordersProduct))
+        console.log(s.id)
+        console.log(resultSearch)
+    }
 
 }
 
@@ -277,3 +300,56 @@ function Updateonload() {
     moveToBuyer()
 }
 window.onload = Updateonload();
+
+
+ordersBtn.addEventListener("click", showOrderSection)
+
+function showOrderSection () {
+    buyer.style.display = "none"
+    seller.style.display = "none"
+    gridBar.style.display = "none"
+    ordersSection.style.display = "flex";
+
+    let arrayOfOrders = JSON.parse(localStorage.getItem("orders"))
+
+    for (i of arrayOfOrders){
+        let quant = arrayOfOrders.reduce ((acc, curr) => {
+            let quantit = curr.name;
+            if(arrayOfOrders.lastIndexOf(quantit)===arrayOfOrders.indexOf(quantit)){
+                return acc = acc+ curr;
+           }
+           return acc
+          
+        },0)
+
+        createRow(i, quant);
+        
+    }
+
+
+    
+}
+
+
+function createRow (row, Quantity){
+    const table = document.querySelector(".ord")
+    const createR = document.createElement("tr");
+    table.appendChild(createR)
+
+    let createCell;
+
+        createCell = document.createElement("td")
+        createCell.textContent = row["name"]
+        createR.appendChild(createCell)
+        createCell = document.createElement("td")
+        createCell.textContent = row["price"]
+        createR.appendChild(createCell)
+        createCell = document.createElement("td")
+        createCell.textContent = row["catagory"]
+        createR.appendChild(createCell)
+        createCell = document.createElement("td")
+        createCell.textContent = Quantity
+        createR.appendChild(createCell)
+
+
+}
