@@ -9,12 +9,38 @@ const productForm = document.getElementById("product-form");
 const arrOfInputs = document.querySelectorAll(".input");
 const catagoriesFiltter = document.querySelector(".catagoriesFiltter");
 const priceSearch = document.querySelector(".priceSearch");
+const grid = document.querySelector(".grid");
+const list = document.querySelector(".list");
 
 let id = 0;
 
 btnSeller.addEventListener("click", moveToSeller);
 btnBuyer.addEventListener("click", moveToBuyer);
 
+
+const gridToList = () => {
+    const items = document.querySelectorAll(".item");
+    for (item of items) {
+        item.style.width = '100%';
+    }
+}
+
+list.addEventListener("click", gridToList);
+
+const listToGrid = () => {
+    const items = document.querySelectorAll(".item");
+    for (item of items) {
+        if (window.screen.width <= 375) {
+            item.style.width = '100%';
+        } else if (window.screen.width <= 425) {
+            item.style.width = '50%';
+        } else {
+            item.style.width = '30%';
+        }
+    }
+}
+
+grid.addEventListener("click", listToGrid);
 
 
 // displays the filtered(searched) items and removes the non-searched ones
