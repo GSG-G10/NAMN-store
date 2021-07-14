@@ -29,6 +29,7 @@ const updateResultName = () => {
       error.textContent = "Item does not found";
     } else {
       buildBuyer(result);
+      buildSeller(result);
     }
   };
 const updateResultCategory = () => {
@@ -39,6 +40,7 @@ const updateResultCategory = () => {
       let result = FilterByCategory(catagoriesFiltter.value);
       buyer.textContent = "";
       buildBuyer(result);
+      buildSeller(result);
     }
   };
   
@@ -48,6 +50,7 @@ const updateResultPrice = () => {
     let result = FilterByPrice(minPrice,maxPrice);
     buyer.textContent = "";
     buildBuyer(result);
+    buildSeller(result);
 };
 
 catagoriesFiltter.addEventListener("change", updateResultCategory);
