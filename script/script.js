@@ -6,17 +6,18 @@ const headerSection = document.querySelector(".header");
 const inputSearch = document.querySelector(".input-search");
 const btnAdd = document.querySelector(".btn-add-product");
 const productForm = document.getElementById("product-form");
-
-
-let id = 1;
-
+const arrOfInputs = document.querySelectorAll(".input");
+const catagoriesFiltter = document.querySelector(".catagoriesFiltter");
+const priceSearch = document.querySelector(".priceSearch");
 btnSeller.addEventListener("click", moveToSeller);
 btnBuyer.addEventListener("click", moveToBuyer);
 
+
+
 // displays the filtered(searched) items and removes the non-searched ones
-const updateResult = () => {
+const updateResultName = () => {
     let result = SearchByName(inputSearch.value);
-    buyer.innerHTML = '';
+    buyer.textContent = "";
     if (result.length == 0) {
         buildBuyer(result);
         let error = document.createElement("h2");
@@ -24,17 +25,47 @@ const updateResult = () => {
         buyer.appendChild(error);
         error.textContent = "Item does not found";
     } else {
+        buildSeller(result);
         buildBuyer(result);
     }
+};
+const updateResultCategory = () => {
+    if (catagoriesFiltter.value === "all") {
+        let items = JSON.parse(localStorage.getItem("cards"));
+        buildBuyer(items);
+    } else {
+        let result = FilterByCategory(catagoriesFiltter.value);
+        buyer.textContent = "";
+        buildSeller(result);
+        buildBuyer(result);
+    }
+};
 
-}
 
-inputSearch.addEventListener('input', updateResult);
+
+inputSearch.addEventListener('input', updateResultName);
+const updateResultPrice = () => {
+    let minPrice = document.querySelector(".minPrice").value;
+    let maxPrice = document.querySelector(".maxPrice").value;
+    let result = FilterByPrice(minPrice, maxPrice);
+    buyer.textContent = "";
+    buildSeller(result);
+    buildBuyer(result);
+};
+
+catagoriesFiltter.addEventListener("change", updateResultCategory);
+priceSearch.addEventListener("click", updateResultPrice);
+inputSearch.addEventListener('input', updateResultName);
 
 function moveToBuyer() {
     seller.style.display = "none";
     buyer.style.display = "flex";
     hideBtnAddProduct();
+    btnSeller.disabled = false;
+    btnBuyer.disabled = true;
+    let items = JSON.parse(localStorage.getItem("cards"));
+    buildBuyer(items);
+
 
 }
 
@@ -42,39 +73,38 @@ function moveToSeller() {
     buyer.style.display = "none";
     seller.style.display = "flex";
     showBtnAddProduct();
-    buildSeller();
     btnSeller.disabled = true;
-
+    btnBuyer.disabled = false;
+    let items = JSON.parse(localStorage.getItem("cards"));
+    buildSeller(items);
 }
 
 
 const arr = [{
-        name: 'book7',
-        url: "https://static.libertyprim.com/files/familles/fraise-large.jpg?1569271765",
-        price: 25,
-        category: "fruits",
-
+        name: 'Carrot',
+        imgSrc: "https://images.unsplash.com/photo-1601493700750-58796129ebb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80",
+        price: "25$",
+        category: 'vegetables'
     },
     {
-        name: 'book4',
-        url: "https://static.libertyprim.com/files/familles/fraise-large.jpg?1569271765",
-        price: 25,
-        category: "fruits",
+        name: 'book1',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$",
+        category: 'vegetables'
 
     }, {
-        name: 'book5',
-        url: "https://static.libertyprim.com/files/familles/fraise-large.jpg?1569271765",
-        price: 25,
-        category: "fruits",
+        name: 'book2',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$",
+        category: 'vegetables'
 
     }
 ];
 
 
 
-
 function buildBuyer(arr) {
-    let itemsInThePage = document.querySelectorAll(".item");
+    let itemsInThePage = document.querySelectorAll(".buyer .item");
     for (i of itemsInThePage) {
         i.remove()
     }
@@ -96,33 +126,41 @@ function buildBuyer(arr) {
         img.src = arr[i].url;
         name.textContent = arr[i].name;
         pricePara.textContent = arr[i].price;
+
         let btnAddToCard = document.createElement("button");
         btnAddToCard.classList.add("btn-to-addCard");
-        btnAddToCard.textContent = "add to card";
+        btnAddToCard.textContent = "Add to card";
         ele.appendChild(btnAddToCard);
     }
 }
 
-buildBuyer(arr);
+function buildSeller(arr) {
 
+    let itemsInThePage = document.querySelectorAll(".seller .item");
+    for (i of itemsInThePage) {
+        i.remove()
+    }
+    itemsInThePage = document.querySelectorAll(".item");
 
-function buildSeller() {
-    console.log(arr);
     for (let i = 0; i < arr.length; i++) {
         let ele = document.createElement("div")
         ele.classList.add("item");
         seller.appendChild(ele);
 
         let img = document.createElement("img");
+        let name = document.createElement("h3");
         let pricePara = document.createElement("p");
 
         img.classList.add("img-product");
+        name.classList.add("name-product");
         pricePara.classList.add("cost");
 
         ele.appendChild(img);
+        ele.appendChild(name);
         ele.appendChild(pricePara);
 
         img.src = arr[i].url;
+        name.textContent = arr[i].name;
         pricePara.textContent = arr[i].price;
 
         let btnRemoveItem = document.createElement("button");
@@ -137,6 +175,7 @@ function buildSeller() {
 
 }
 
+
 function showBtnAddProduct() {
     btnAdd.classList.remove("hide");
 }
@@ -148,7 +187,16 @@ function hideBtnAddProduct() {
 btnAdd.addEventListener("click", displayForm);
 
 function displayForm() {
+    for (let i = 0; i < arrOfInputs.length; i++) {
+        arrOfInputs[i].value = ""
+    }
+
     productForm.classList.remove("hide");
+
+}
+
+function hideForm() {
+    productForm.classList.add("hide");
 }
 
 // function for submit button
@@ -158,6 +206,7 @@ submitBtn.addEventListener("click", saveInputValue)
 
 function saveInputValue() {
     const arrOfInputs = document.querySelectorAll(".input");
+
     let objectOfNewProduct = {}
 
     objectOfNewProduct["name"] = arrOfInputs[0].value
@@ -168,28 +217,63 @@ function saveInputValue() {
     // let indexOfItem =
     arr.push(objectOfNewProduct);
     // console.log(indexOfItem)
-    editSection();
-    id = id + 1;
+    //editSection();
+
+    objectOfNewProduct["id"] = arr.length + 1;
+
+    let oldItems = JSON.parse(localStorage.getItem("cards"));
+    if (oldItems == null || oldItems == 'null') {
+        let new_arr = []
+        new_arr.push(objectOfNewProduct)
+
+        localStorage.setItem("cards", JSON.stringify(new_arr));
+
+    } else {
+        oldItems.push(objectOfNewProduct)
+        localStorage.clear()
+        localStorage.setItem("cards", JSON.stringify(oldItems));
+
+    }
+
+    let items = JSON.parse(localStorage.getItem("cards"));
+    updateSections(items);
 
 }
 
-function editSection() {
 
-    buyer.textContent = null;
 
-    buildBuyer(arr);
-    buildSeller();
-}
+// function editSection() {
+
+//     buyer.textContent = null;
+
+//     buildBuyer(arr);
+//     buildSeller();
+// }
 //  remove product
 function remove(event) {
     let s = event.target;
+    let items = JSON.parse(localStorage.getItem("cards"));
     console.log(s.id);
-    for (let i = 0; i < arr.length; i++) {
-        if (s.id == arr[i].name) {
-            arr.splice(i, 1);
+    for (let i = 0; i < items.length; i++) {
+        if (s.id == items[i].name) {
+            items.splice(i, 1);
         }
     }
     let element = document.getElementById(s.id);
     element.parentNode.remove();
+    localStorage.clear()
+    localStorage.setItem("cards", JSON.stringify(items));
 
 }
+
+
+function updateSections(items) {
+    buildBuyer(items);
+    buildSeller(items);
+    hideForm();
+}
+
+function Updateonload() {
+    moveToBuyer()
+}
+window.onload = Updateonload();
