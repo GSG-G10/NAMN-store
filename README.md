@@ -1,6 +1,6 @@
 <h1>Nature’s basket store</h1>
 
-**You can see our live link**
+**You can see our live link** https://gsg-g10.github.io/NAMN-store/
 
 
 
