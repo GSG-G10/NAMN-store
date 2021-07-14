@@ -70,6 +70,9 @@ const updateResultCategory = () => {
     }
 };
 
+
+
+inputSearch.addEventListener('input', updateResultName);
 const updateResultPrice = () => {
     let minPrice = document.querySelector(".minPrice").value;
     let maxPrice = document.querySelector(".maxPrice").value;
@@ -107,25 +110,27 @@ function moveToSeller() {
 
 
 const arr = [{
-    name: 'Carrot',
-    imgSrc: "https://images.unsplash.com/photo-1601493700750-58796129ebb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80",
-    price: "25$",
-    category: 'vegetables'
-},
-{
-    name: 'book1',
-    imgSrc: "https://via.placeholder.com/150",
-    price: "40$",
-    category: 'vegetables'
+        name: 'Carrot',
+        imgSrc: "https://images.unsplash.com/photo-1601493700750-58796129ebb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80",
+        price: "25$",
+        category: 'vegetables'
+    },
+    {
+        name: 'book1',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$",
+        category: 'vegetables'
 
-}, {
-    name: 'book2',
-    imgSrc: "https://via.placeholder.com/150",
-    price: "40$",
-    category: 'vegetables'
+    }, {
+        name: 'book2',
+        imgSrc: "https://via.placeholder.com/150",
+        price: "40$",
+        category: 'vegetables'
 
-}
+    }
 ];
+
+
 
 function buildBuyer(arr) {
     let itemsInThePage = document.querySelectorAll(".buyer .item");
@@ -147,7 +152,7 @@ function buildBuyer(arr) {
         ele.appendChild(name);
         ele.appendChild(pricePara);
 
-        img.src = arr[i].src;
+        img.src = arr[i].url;
         name.textContent = arr[i].name;
         pricePara.textContent = arr[i].price;
 
@@ -165,7 +170,6 @@ function buildSeller(arr) {
         i.remove()
     }
     itemsInThePage = document.querySelectorAll(".item");
-
 
     for (let i = 0; i < arr.length; i++) {
         let ele = document.createElement("div")
@@ -190,8 +194,12 @@ function buildSeller(arr) {
 
         let btnRemoveItem = document.createElement("button");
         btnRemoveItem.classList.add("btn-to-removeItem");
+        btnRemoveItem.setAttribute("id", arr[i].name);
+        btnRemoveItem.setAttribute("onclick", "remove(event);");
         btnRemoveItem.textContent = "Remove the Product";
         ele.appendChild(btnRemoveItem);
+
+
     }
 
 }
@@ -199,6 +207,7 @@ function buildSeller(arr) {
 
 function showBtnAddProduct() {
     btnAdd.classList.remove("hide");
+
 }
 
 function hideBtnAddProduct() {
@@ -208,6 +217,7 @@ function hideBtnAddProduct() {
 btnAdd.addEventListener("click", displayForm);
 
 function displayForm() {
+
     for (let i = 0; i < arrOfInputs.length; i++) {
         arrOfInputs[i].value = ""
     }
@@ -226,6 +236,7 @@ const submitBtn = document.querySelector(".btn-add");
 submitBtn.addEventListener("click", saveInputValue)
 
 function saveInputValue() {
+    const arrOfInputs = document.querySelectorAll(".input");
 
     let objectOfNewProduct = {}
 
@@ -233,6 +244,12 @@ function saveInputValue() {
     objectOfNewProduct["url"] = arrOfInputs[1].value;
     objectOfNewProduct["price"] = arrOfInputs[2].value;
     objectOfNewProduct["category"] = arrOfInputs[3].value;
+
+    // let indexOfItem =
+    arr.push(objectOfNewProduct);
+    // console.log(indexOfItem)
+    //editSection();
+
     objectOfNewProduct["id"] = arr.length + 1;
 
     let oldItems = JSON.parse(localStorage.getItem("cards"));
@@ -253,6 +270,33 @@ function saveInputValue() {
     updateSections(items);
 
 }
+
+
+
+// function editSection() {
+
+//     buyer.textContent = null;
+
+//     buildBuyer(arr);
+//     buildSeller();
+// }
+//  remove product
+function remove(event) {
+    let s = event.target;
+    let items = JSON.parse(localStorage.getItem("cards"));
+    console.log(s.id);
+    for (let i = 0; i < items.length; i++) {
+        if (s.id == items[i].name) {
+            items.splice(i, 1);
+        }
+    }
+    let element = document.getElementById(s.id);
+    element.parentNode.remove();
+    localStorage.clear()
+    localStorage.setItem("cards", JSON.stringify(items));
+
+}
+
 
 function updateSections(items) {
     buildBuyer(items);
