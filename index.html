@@ -7,15 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NAMN APP</title>
     <link href="./css/style.css" rel="stylesheet ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Festive&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/51ca9a5e15.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
     <header class="header">
 
-        <nav>
-            <button class="switch-seller ">Seller</button>
-            <button class="switch-buyer ">buyer</button>
+        <nav class="nav-bar">
+
+            <section class="nav-buttons">
+
+                <div class="nav-buttons-container">
+                    <button class="switch-seller ">Seller</button>
+                    <button class="switch-buyer ">buyer</button>
+                </div>
+                <button class="cart"><i class="fas fa-shopping-basket"></i></button>
+            </section>
+
             <div class="div-btn-add">
                 <button class="btn-add-product hide"> Add product</button>
             </div>
@@ -23,22 +35,39 @@
 
         <section class="search-bar">
             <div class="search-bar-container">
-                <form name="searchForm">
-                    <input class="input-search" type="text" placeholder="Search.." name="search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                    <div>
-                        <label for="catagoriesFiltter">Choose a catagory:</label>
-                        <select name="catagoriesFiltter" class="catagoriesFiltter" form="searchForm">
-                            <option value="all">All</option>
-                            <option value="fruits">fruits</option>
-                            <option value="vegetables">vegetables‏</option>
-                        </select>
+                <h1>Nature’s Basket</h1>
+                <form name="searchForm" class="searchForm">
+                    <div class="search-container">
+                        <input class="input-search" type="text" placeholder="Search.." name="search">
                     </div>
-                </form>
+                    <div class="categories-container">
+                        <div class="catagories">
+                            <label for="catagoriesFiltter">Choose a catagory:</label>
+                            <select name="catagoriesFiltter" class="catagoriesFiltter" form="searchForm">
+                                <option value="all">All</option>
+                                <option value="fruits">fruits</option>
+                                <option value="vegetables">vegetables‏</option>
+                            </select>
+                        </div>
+                        <div class="price-container">
+                            <input class="minPrice" type="number" placeholder="Min Price" name="minPrice">
+                            <input class="maxPrice" type="number" placeholder="Max Price" name="maxPrice">
+                            <button class="priceSearch" type="button">
+                                search by price
+                            </button>
+                        </div>
+                    </div>
 
-            </div>
+                </form>
         </section>
     </header>
+
+    <section class="grid-list">
+        <div id="grid-list">
+            <button><i class="fas fa-th"></i></button>
+            <button><i class="fas fa-list"></i></button>
+        </div>
+    </section>
 
     <section class="buyer">
     </section>
@@ -69,11 +98,12 @@
         </form>
     </section>
 
-    <footer>
+    <footer class="footer">
 
     </footer>
     <script src="./script/script.js "></script>
     <script src="./script/function.js "></script>
+
 
 </body>
 
