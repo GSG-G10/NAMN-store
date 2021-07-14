@@ -178,6 +178,7 @@ function buildSeller(arr) {
 
 function showBtnAddProduct() {
     btnAdd.classList.remove("hide");
+
 }
 
 function hideBtnAddProduct() {
@@ -187,6 +188,7 @@ function hideBtnAddProduct() {
 btnAdd.addEventListener("click", displayForm);
 
 function displayForm() {
+
     for (let i = 0; i < arrOfInputs.length; i++) {
         arrOfInputs[i].value = ""
     }
