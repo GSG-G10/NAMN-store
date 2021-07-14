@@ -8,15 +8,13 @@ const addArrlocalStorage = () => {
 
 // search bar function => filtering the local storage to find the searched items
 
-const SearchByName = (input) => {
+const SearchByName = (input,items) => {
   let resultSearch;
-  let items = JSON.parse(localStorage.getItem("cards"));
   if (items === null) {
     window.alert("Item does not found");
   } else {
     resultSearch = items.filter((item) => item.name.includes(input));
   }
-
   return resultSearch;
 };
 
@@ -50,3 +48,4 @@ const FilterByPrice = (minPrice,maxPrice) => {
   }
   return resultSearch;
 };
+module.exports = {SearchByName,FilterByCategory,FilterByPrice}
