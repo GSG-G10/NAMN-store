@@ -346,13 +346,9 @@ function showOrderSection () {
     let arrayOfOrders = JSON.parse(localStorage.getItem("orders"))
 
     for (i of arrayOfOrders){
-
-        createRow(i, quant);
-        
+        createRow(i, 1);
     }
 
-
-    
 }
 
 

@@ -7,6 +7,7 @@ const addArrlocalStorage = () => {
 // window.onload = addArrlocalStorage()
 
 // search bar function => filtering the local storage to find the searched items
+
 const SearchByName = (input) => {
   let resultSearch;
   let items = JSON.parse(localStorage.getItem("cards"));
@@ -39,7 +40,6 @@ Number.prototype.between = function(a, b) {
 
 
 const FilterByPrice = (minPrice,maxPrice) => {
-  
   let resultSearch;
   let items = JSON.parse(localStorage.getItem("cards"));
   if (items === null) {
