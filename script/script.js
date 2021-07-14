@@ -30,14 +30,14 @@ const updateResultName = () => {
 
 // search by category 
 const updateResultCategory = () => {
-    
-    if(catagoriesFiltter.value === 'all'){
+
+    if (catagoriesFiltter.value === 'all') {
         let items = JSON.parse(localStorage.getItem('cards'));
         buildBuyer(items);
-    }else{
+    } else {
         let result = FilterByCategory(catagoriesFiltter.value);
         buyer.innerHTML = '';
-        buildBuyer(result);       
+        buildBuyer(result);
     }
 }
 
@@ -59,37 +59,24 @@ function moveToSeller() {
 
 
 const arr = [{
-        name: 'book7',
-        imgSrc: "https://via.placeholder.com/150",
-        price: "25$",
-        category:'vegetables'
-    },
-    {
-        name: 'book1',
-        imgSrc: "https://via.placeholder.com/150",
-        price: "40$",
-        category:'vegetables'
+    name: 'Carrot',
+    imgSrc: "https://images.unsplash.com/photo-1601493700750-58796129ebb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=667&q=80",
+    price: "25$",
+    category: 'vegetables'
+},
+{
+    name: 'book1',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$",
+    category: 'vegetables'
 
-    }, {
-        name: 'book2',
-        imgSrc: "https://via.placeholder.com/150",
-        price: "40$",
-        category:'vegetables'
+}, {
+    name: 'book2',
+    imgSrc: "https://via.placeholder.com/150",
+    price: "40$",
+    category: 'vegetables'
 
-    },
-    {
-        name: 'book3',
-        imgSrc: "https://via.placeholder.com/150",
-        price: "40$",
-        category:'vegetables'
-
-    },
-    {
-        name: 'book4',
-        imgSrc: "https://via.placeholder.com/150",
-        price: "40$",
-        category:'fruits'
-    }
+}
 ];
 
 
@@ -118,7 +105,7 @@ function buildBuyer(arr) {
         pricePara.textContent = arr[i].price;
         let btnAddToCard = document.createElement("button");
         btnAddToCard.classList.add("btn-to-addCard");
-        btnAddToCard.textContent = "add to card";
+        btnAddToCard.textContent = "Add to card";
         ele.appendChild(btnAddToCard);
     }
 }
