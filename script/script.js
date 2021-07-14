@@ -137,7 +137,6 @@ function buildSeller() {
 
 }
 
-
 function showBtnAddProduct() {
     btnAdd.classList.remove("hide");
 }
