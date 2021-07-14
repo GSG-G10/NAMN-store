@@ -209,7 +209,6 @@ h1 {
 
 .item {
   width: 30%;
-  height: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -217,18 +216,12 @@ h1 {
   padding-bottom: 6%;
 }
 
-.item:hover {
-  width: 33%;
-  height: 55%;
-}
-
 .btn-to-removeItem,
 .btn-add-product,
 .btn-to-addCard {
   width: 100%;
-  height: 50px;
+  height: 3rem;
   border: #f9d976;
-  margin-bottom: 19%;
   background-color: #8bca67;
   font-family: fantasy;
   color: #055816;
@@ -285,4 +278,90 @@ h1 {
   background-color: rgb(182, 201, 201);
   top: 150px;
 }
-/********************* Start main section styling****************/
+/********************* End main section styling****************/
+
+/********************* Start responsive ***********************/
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 9px;
+  }
+  .catagoriesFiltter {
+    width: 36%;
+  }
+  .priceSearch {
+    width: 45%;
+  }
+  .maxPrice {
+    width: 19%;
+  }
+  .minPrice {
+    width: 19%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  html {
+    font-size: 8px;
+  }
+  .searchForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 96%;
+  }
+  .priceSearch {
+    width: 54%;
+  }
+  .input-search {
+    width: 116%;
+  }
+  .nav-buttons-container {
+    margin-left: -39px;
+    width: 120%;
+  }
+  .switch-seller {
+    width: 38%;
+  }
+  .switch-buyer {
+    width: 38%;
+  }
+
+  .item {
+    width: 50%;
+    padding: 1%;
+  }
+
+  .buyer {
+    width: 90%;
+    padding: 1%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  html {
+    font-size: 7px;
+  }
+  .priceSearch {
+    width: 56%;
+  }
+  .switch-seller {
+    width: 46%;
+  }
+  .switch-buyer {
+    width: 46%;
+  }
+
+  .item {
+    width: 100%;
+    padding: 1%;
+  }
+}
+
+/********************* End responsive ***********************/
