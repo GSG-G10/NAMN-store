@@ -64,8 +64,8 @@
 
     <section class="grid-list">
         <div id="grid-list">
-            <button><i class="fas fa-th"></i></button>
-            <button><i class="fas fa-list"></i></button>
+            <button class="grid"><i class="fas fa-th"></i></button>
+            <button class="list"><i class="fas fa-list"></i></button>
         </div>
     </section>
 
@@ -74,27 +74,27 @@
 
     <section class="seller">
         <form id="product-form" class="hide">
-            <div class="name-input">
+            <div class="name-input flex">
                 <label for="name"> name of product </label>
                 <input class="input" type="text" id="name">
             </div>
-            <div class="image-input">
+            <div class="image-input flex">
                 <label for="image"> link of product </label>
                 <input class="input" type="url" id="image">
             </div>
-            <div class="price-input">
+            <div class="price-input flex">
                 <label for="price"> price of product $ </label>
                 <input class="input" type="number" id="price">
             </div>
-            <div>
-                <label for="catagories">Choose a catagory:</label>
+            <div class="flex">
+                <label for="catagories">Choose a catagory</label>
                 <select class="input" name="catagories" id="catagories" form="product-form">
                     <option value="fruits">fruits</option>
                     <option value="vegetables" selected>vegetables‏</option>
 
                 </select>
             </div>
-            <button type="button" class="btn-add">add product</button>
+            <button type="button" class="btn-add flex">add product</button>
         </form>
     </section>
 
