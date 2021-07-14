@@ -28,8 +28,8 @@ const updateResultName = () => {
       buyer.appendChild(error);
       error.textContent = "Item does not found";
     } else {
-      buildBuyer(result);
-      buildSeller(result);
+        buildSeller(result);
+        buildBuyer(result);
     }
   };
 const updateResultCategory = () => {
@@ -39,8 +39,8 @@ const updateResultCategory = () => {
     } else {
       let result = FilterByCategory(catagoriesFiltter.value);
       buyer.textContent = "";
-      buildBuyer(result);
       buildSeller(result);
+      buildBuyer(result);
     }
   };
   
@@ -49,8 +49,8 @@ const updateResultPrice = () => {
     let maxPrice = document.querySelector(".maxPrice").value;
     let result = FilterByPrice(minPrice,maxPrice);
     buyer.textContent = "";
-    buildBuyer(result);
     buildSeller(result);
+    buildBuyer(result);
 };
 
 catagoriesFiltter.addEventListener("change", updateResultCategory);
@@ -84,7 +84,7 @@ const arr = [
 ];
 
 function buildBuyer(arr) {
-    let itemsInThePage = document.querySelectorAll(".item");
+    let itemsInThePage = document.querySelectorAll(".buyer .item");
     for (i of itemsInThePage) {
         i.remove()
     }
@@ -116,7 +116,7 @@ function buildBuyer(arr) {
 
 function buildSeller(arr) {
     
-    let itemsInThePage = document.querySelectorAll(".item");
+    let itemsInThePage = document.querySelectorAll(".seller .item");
     for (i of itemsInThePage) {
         i.remove()
     }
