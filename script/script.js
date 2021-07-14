@@ -53,20 +53,20 @@ const arr = [{
         url: "https://static.libertyprim.com/files/familles/fraise-large.jpg?1569271765",
         price: 25,
         category: "fruits",
-        id: 0,
+
     },
     {
         name: 'book4',
         url: "https://static.libertyprim.com/files/familles/fraise-large.jpg?1569271765",
         price: 25,
         category: "fruits",
-        id: 0,
+
     }, {
         name: 'book5',
         url: "https://static.libertyprim.com/files/familles/fraise-large.jpg?1569271765",
         price: 25,
         category: "fruits",
-        id: 0,
+
     }
 ];
 
