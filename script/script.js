@@ -37,6 +37,9 @@ function moveToBuyer() {
     hideBtnAddProduct();
     btnSeller.disabled = false;
     btnBuyer.disabled = true;
+    let items = JSON.parse(localStorage.getItem("cards"));
+    buildBuyer(items);
+
 
 }
 
@@ -46,21 +49,13 @@ function moveToSeller() {
     showBtnAddProduct();
     btnSeller.disabled = true;
     btnBuyer.disabled = false;
-
-
+    let items = JSON.parse(localStorage.getItem("cards"));
+    buildSeller(items);
 }
 
 
-const arr = [{
-    name: 'book7',
-    url: "https://static.libertyprim.com/files/familles/fraise-large.jpg?1569271765",
-    price: 25,
-    category: "fruits",
-    id: 0,
-}];
-
-
-
+const arr = [
+];
 
 function buildBuyer(arr) {
     let itemsInThePage = document.querySelectorAll(".item");
@@ -93,10 +88,13 @@ function buildBuyer(arr) {
     }
 }
 
-buildBuyer(arr);
+function buildSeller(arr) {
+    let itemsInThePage = document.querySelectorAll(".item");
+    for (i of itemsInThePage) {
+        i.remove()
+    }
+    itemsInThePage = document.querySelectorAll(".item");
 
-
-function buildSeller() {
 
     for (let i = 0; i < arr.length; i++) {
         let ele = document.createElement("div")
@@ -126,7 +124,6 @@ function buildSeller() {
     }
 
 }
-buildSeller();
 
 
 function showBtnAddProduct() {
@@ -165,33 +162,34 @@ function saveInputValue() {
     objectOfNewProduct["url"] = arrOfInputs[1].value;
     objectOfNewProduct["price"] = arrOfInputs[2].value;
     objectOfNewProduct["category"] = arrOfInputs[3].value;
+    objectOfNewProduct["id"] = arr.length +1 ;
+    
+    let oldItems = JSON.parse(localStorage.getItem("cards"));
+    if (oldItems == null || oldItems == 'null'){
+        let new_arr = []
+        new_arr.push(objectOfNewProduct)
+        
+        localStorage.setItem("cards", JSON.stringify(new_arr));
+        
+    }else{
+        oldItems.push(objectOfNewProduct)
+        localStorage.clear()
+        localStorage.setItem("cards", JSON.stringify(oldItems));
 
-
-    arr.push(objectOfNewProduct);
-    updateSections();
+    }
+    
+    let items = JSON.parse(localStorage.getItem("cards"));
+    updateSections(items);
 
 }
 
-function updateSections() {
-    buildBuyer(arr);
-    buildSeller();
+function updateSections(items) {
+    buildBuyer(items);
+    buildSeller(items);
     hideForm();
 }
 
-
-
-// function updateSections (current,next){
-//     if (next != current) {
-//         localStorage.setItem('cards', JSON.stringify(arr));
-//         let items = JSON.parse(localStorage.getItem('cards'));
-//         buildSeller(items);
-//         buildBuyer(items);
-//         hideForm();
-//     }
-// }
-
-
-
-// let current = arr.length
-// let next = arr.length
-// // updateSections(current,next);
+function Updateonload(){
+    moveToBuyer()
+}
+window.onload = Updateonload();
