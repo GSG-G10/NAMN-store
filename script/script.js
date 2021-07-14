@@ -48,7 +48,8 @@ grid.addEventListener("click", listToGrid);
 
 // displays the filtered(searched) items and removes the non-searched ones
 const updateResultName = () => {
-    let result = SearchByName(inputSearch.value);
+    let items = JSON.parse(localStorage.getItem("cards"));
+    let result = SearchByName(inputSearch.value,items);
     buyer.textContent = "";
     if (result.length == 0) {
         buildBuyer(result);
