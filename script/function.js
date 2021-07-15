@@ -11,7 +11,7 @@ const addArrlocalStorage = () => {
 const SearchByName = (input,items) => {
   let resultSearch;
   if (items === null) {
-    window.alert("Item does not found");
+    return undefined;
   } else {
     resultSearch = items.filter((item) => item.name.includes(input));
   }
@@ -29,11 +29,6 @@ const FilterByCategory = (input,items) => {
   return resultSearch;
 };
 
-// Number.prototype.between = function(a, b) {
-//   var min = Math.min.apply(Math, [a, b]),
-//     max = Math.max.apply(Math, [a, b]);
-//   return this > min && this < max;
-// };
 
 function rearrange (min,input,max) {
   if (input >= min && input <= max) {
