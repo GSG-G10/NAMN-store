@@ -256,10 +256,7 @@ function saveInputValue() {
     objectOfNewProduct["price"] = arrOfInputs[2].value;
     objectOfNewProduct["category"] = arrOfInputs[3].value;
 
-    // let indexOfItem =
     arr.push(objectOfNewProduct);
-    // console.log(indexOfItem)
-    //editSection();
 
     objectOfNewProduct["id"] = arr.length + 1;
 
@@ -282,16 +279,6 @@ function saveInputValue() {
 
 }
 
-
-
-// function editSection() {
-
-//     buyer.textContent = null;
-
-//     buildBuyer(arr);
-//     buildSeller();
-// }
-//  remove product
 function remove(event) {
     let s = event.target;
     let items = JSON.parse(localStorage.getItem("cards"));
