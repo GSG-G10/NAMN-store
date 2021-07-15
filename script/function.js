@@ -1,7 +1,6 @@
-
 // search bar function => filtering the local storage to find the searched items
 
-const SearchByName = (input,items) => {
+const SearchByName = (input, items) => {
   let resultSearch;
   if (items === null) {
     return undefined;
@@ -11,7 +10,7 @@ const SearchByName = (input,items) => {
   return resultSearch;
 };
 
-const FilterByCategory = (input,items) => {
+const FilterByCategory = (input, items) => {
   let resultSearch;
   if (items === null) {
     window.alert("Item does not found");
@@ -22,8 +21,7 @@ const FilterByCategory = (input,items) => {
   return resultSearch;
 };
 
-
-function rearrange (min,input,max) {
+function rearrange(min, input, max) {
   if (input >= min && input <= max) {
     return true;
   } else {
@@ -31,15 +29,19 @@ function rearrange (min,input,max) {
   }
 }
 
-
-
-const FilterByPrice = (minPrice,maxPrice,items) => {
+const FilterByPrice = (minPrice, maxPrice, items) => {
   let resultSearch;
   if (items === null) {
     window.alert("Item does not found");
   } else {
-    resultSearch = items.filter((item) => rearrange(parseFloat(minPrice),parseFloat(item.price),parseFloat(maxPrice)));
+    resultSearch = items.filter((item) =>
+      rearrange(
+        parseFloat(minPrice),
+        parseFloat(item.price),
+        parseFloat(maxPrice)
+      )
+    );
   }
   return resultSearch;
 };
-module.exports = {SearchByName,FilterByCategory,FilterByPrice,rearrange}
+module.exports = { SearchByName, FilterByCategory, FilterByPrice, rearrange };
