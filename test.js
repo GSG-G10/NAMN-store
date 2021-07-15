@@ -1,4 +1,4 @@
-const {SearchByName,FilterByPrice,FilterByCategory} = require('./script/function')
+const {SearchByName,FilterByPrice,FilterByCategory,rearrange} = require('./script/function')
 
 const item = [{name:'cc',price:'15$',category:'fruits'},{name:'zz',price:'40$',category:'vegetables'}]
 
@@ -30,3 +30,16 @@ describe('Testing FilterByCategory return array', () => {
 	});
 });
 
+describe('Testing price by max and min return array', () => {
+	test('Should return item between min and max number', () => {
+		const actual = rearrange(5,15,100);
+		const expected = true;
+		expect(actual).toBe(expected);
+	});
+
+	test('Should return item between min and max number', () => {
+		const actual = rearrange(30,10,40);
+		const expected = false;
+		expect(actual).toBe(expected);
+	});
+});

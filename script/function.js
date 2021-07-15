@@ -42,4 +42,4 @@ const FilterByPrice = (minPrice,maxPrice,items) => {
   }
   return resultSearch;
 };
-module.exports = {SearchByName,FilterByCategory,FilterByPrice}
+module.exports = {SearchByName,FilterByCategory,FilterByPrice,rearrange}
