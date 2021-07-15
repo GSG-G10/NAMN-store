@@ -1,10 +1,3 @@
-// add array to local storge
-// must removed
-const addArrlocalStorage = () => {
-  localStorage.setItem("cards", JSON.stringify(arr));
-};
-
-// window.onload = addArrlocalStorage()
 
 // search bar function => filtering the local storage to find the searched items
 
